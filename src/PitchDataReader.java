@@ -8,8 +8,31 @@ public class PitchDataReader {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         // Assuming the 'pitch_data_files' directory is in the parent directory of where the program runs.
-        File dir = new File("../pitch_data_files");
+        File dir = new File(".../pitch_data_files");
         File[] files = dir.listFiles((d, name) -> name.endsWith(".csv"));
+        // ...
+        
+        if (!dir.exists() || !dir.isDirectory()) {
+
+            System.out.println("Directory does not exist or is not a directory: " + dir.getAbsolutePath());
+             scanner.close();
+             return;
+            }
+            
+    
+            if (files == null) {
+                System.out.println("No CSV files found in directory: " + dir.getAbsolutePath());
+                 scanner.close();
+                 return;
+                }
+
+
+
+// Proceed with file processing...
+
+// ...
+
+      
 
         for (int i = 0; i < files.length && i < 10; i++) {
             File file = files[i];
