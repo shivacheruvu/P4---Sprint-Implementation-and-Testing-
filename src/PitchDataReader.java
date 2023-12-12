@@ -8,7 +8,7 @@ public class PitchDataReader {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         // Assuming the 'pitch_data_files' directory is in the parent directory of where the program runs.
-        File dir = new File(".../pitch_data_files");
+        File dir = new File("pitch_data_files");
         File[] files = dir.listFiles((d, name) -> name.endsWith(".csv"));
         // ...
         
@@ -41,14 +41,61 @@ public class PitchDataReader {
             try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                 // Read and store the data points in variables with suitable names
                 String[] frontCloseCorner = br.readLine().split(",");
+                int frontCloseCornerX = Integer.parseInt(frontCloseCorner[0].trim());
+                int frontCloseCornerY = Integer.parseInt(frontCloseCorner[1].trim());
+                
                 String[] backCloseCorner = br.readLine().split(",");
+                int backCloseCornerX = Integer.parseInt(backCloseCorner[0].trim());
+                int backCloseCornerY = Integer.parseInt(backCloseCorner[1].trim());
+                
                 String[] point = br.readLine().split(",");
+                int pointX = Integer.parseInt(point[0].trim());
+                int pointY = Integer.parseInt(point[1].trim());
+                
                 String[] backFarCorner = br.readLine().split(",");
+                int backFarCornerX = Integer.parseInt(backFarCorner[0].trim());
+                int backFarCornerY = Integer.parseInt(backFarCorner[1].trim());
+                
                 String[] frontFarCorner = br.readLine().split(",");
+                int frontFarCornerX = Integer.parseInt(frontFarCorner[0].trim());
+                int frontFarCornerY = Integer.parseInt(frontFarCorner[1].trim());
+                
                 String[] shoulder1 = br.readLine().split(",");
+                int shoulder1X = Integer.parseInt(shoulder1[0].trim());
+                int shoulder1Y = Integer.parseInt(shoulder1[1].trim());
+                
                 String[] shoulder2 = br.readLine().split(",");
+                int shoulder2X = Integer.parseInt(shoulder2[0].trim());
+                int shoulder2Y = Integer.parseInt(shoulder2[1].trim());
+                
                 String[] knee1 = br.readLine().split(",");
+                int knee1X = Integer.parseInt(knee1[0].trim());
+                int knee1Y = Integer.parseInt(knee1[1].trim());
+                
                 String[] knee2 = br.readLine().split(",");
+                int knee2X = Integer.parseInt(knee2[0].trim());
+                int knee2Y = Integer.parseInt(knee2[1].trim());
+
+                
+                
+
+                // Future test cases batter over plate calculation
+                if((!(Math.abs(knee1X - pointX) <= 3))){
+                    int adjustment_val = Math.abs(knee1X - pointX);
+                    if(knee1X > pointX){
+                        knee1X = knee1X - adjustment_val;
+                        knee2X = knee2X - adjustment_val;
+                        shoulder1X = shoulder1X -adjustment_val;
+                        shoulder2X = shoulder2X - adjustment_val;
+                    }else if(knee1X < pointX){
+                        knee1X = knee1X + adjustment_val;
+                        knee2X = knee2X + adjustment_val;
+                        shoulder1X = shoulder1X +adjustment_val;
+                        shoulder2X = shoulder2X + adjustment_val;
+                    }
+
+                }
+
 
                 // Assuming the pitch data starts at line 10 and continues until the end of the file.
                 String line;
@@ -62,6 +109,28 @@ public class PitchDataReader {
                     int ballLeftY = Integer.parseInt(pitchData[4]);
                     int ballRightX = Integer.parseInt(pitchData[5]);
                     int ballRightY = Integer.parseInt(pitchData[6]);
+                     //                    309       316             316           351            221            283          283             299 Pitch 5 pass Line 19
+                     //                    309       314             314           351            221            320         320         299 Pitch 1 Fail Line 22
+
+                    boolean PureStrike = (knee2X <= ballCenterX && ballCenterX <= knee1X) && (shoulder1Y <= ballCenterY &&  ballCenterY <= knee1Y);
+
+                    boolean edgePresent = ((knee2X <= ballLeftX && ballLeftX <= knee1X) && (shoulder1Y <= ballLeftY &&  ballLeftY <= knee1Y)) || ((knee2X <= ballRightX && ballRightX <= knee1X) && (shoulder1Y <= ballRightY &&  ballRightY <= knee1Y));
+
+                    boolean outside = (knee2X <= ballCenterX  && ballCenterX<= knee1X) && (knee1)
+
+                    if(PureStrike || edgePresent){
+                        System.out.println("Strike");
+                    }
+                    
+
+                    
+                    
+
+                    
+
+                    
+                    
+                    
 
                     // You can now use these variables as needed for further processing.
                 }
