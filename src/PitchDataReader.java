@@ -112,16 +112,27 @@ public class PitchDataReader {
                      //                    309       316             316           351            221            283          283             299 Pitch 5 pass Line 19
                      //                    309       314             314           351            221            320         320         299 Pitch 1 Fail Line 22
 
-                    boolean PureStrike = (knee2X <= ballCenterX && ballCenterX <= knee1X) && (shoulder1Y <= ballCenterY &&  ballCenterY <= knee1Y);
+                     
+                    boolean outside_pixel_threshold = Math.abs(ballLeftX - ballRightX) != 9;
 
-                    boolean edgePresent = ((knee2X <= ballLeftX && ballLeftX <= knee1X) && (shoulder1Y <= ballLeftY &&  ballLeftY <= knee1Y)) || ((knee2X <= ballRightX && ballRightX <= knee1X) && (shoulder1Y <= ballRightY &&  ballRightY <= knee1Y));
+                    boolean PureStrike = (knee2X <= ballCenterX && ballCenterX <= knee1X) && (shoulder1Y <= ballCenterY &&  ballCenterY <= knee1Y)  && !(outside_pixel_threshold);
 
-                    boolean outside = (knee2X <= ballCenterX  && ballCenterX<= knee1X) && (knee1)
-
+                    boolean edgePresent = (((knee2X <= ballLeftX && ballLeftX <= knee1X) && (shoulder1Y <= ballLeftY &&  ballLeftY <= knee1Y)) || ((knee2X <= ballRightX && ballRightX <= knee1X) && (shoulder1Y <= ballRightY &&  ballRightY <= knee1Y))) && !(outside_pixel_threshold);
+                    
                     if(PureStrike || edgePresent){
                         System.out.println("Strike");
+                        return;
                     }
+
                     
+
+
+
+
+
+
+
+
 
                     
                     
