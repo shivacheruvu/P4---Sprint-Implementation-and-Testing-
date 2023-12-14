@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.channels.ScatteringByteChannel;
 import java.util.Scanner;
 
 public class PitchDataReader {
@@ -33,7 +34,7 @@ public class PitchDataReader {
 // ...
 
       
-
+// places batter and strikezone 
         for (int i = 0; i < files.length && i < 10; i++) {
             File file = files[i];
             System.out.println("Reading file: " + file.getName());
@@ -99,6 +100,7 @@ public class PitchDataReader {
 
                 // Assuming the pitch data starts at line 10 and continues until the end of the file.
                 String line;
+                Boolean checker = false;
                 while ((line = br.readLine()) != null) {
                     String[] pitchData = line.split(",");
                     // Process pitch data. For example:
@@ -120,32 +122,18 @@ public class PitchDataReader {
                     boolean edgePresent = (((knee2X <= ballLeftX && ballLeftX <= knee1X) && (shoulder1Y <= ballLeftY &&  ballLeftY <= knee1Y)) || ((knee2X <= ballRightX && ballRightX <= knee1X) && (shoulder1Y <= ballRightY &&  ballRightY <= knee1Y))) && !(outside_pixel_threshold);
                     
                     if(PureStrike || edgePresent){
-                        System.out.println("Strike");
-                        return;
+                        checker = true;
+                        break;
                     }
-
                     
 
+            }
 
-
-
-
-
-
-
-
-                    
-                    
-
-                    
-
-                    
-                    
-                    
-
-                    // You can now use these variables as needed for further processing.
+                if(checker){
+                    System.out.println("Strike");
+                }else{
+                    System.out.println("Ball");
                 }
-
                 System.out.println("Finished processing file: " + file.getName());
             } catch (IOException e) {
                 System.err.println("Error reading file: " + file.getName());
