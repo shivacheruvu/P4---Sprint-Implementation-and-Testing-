@@ -9,7 +9,7 @@ public class PitchDataReader {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         // Assuming the 'pitch_data_files' directory is in the parent directory of where the program runs.
-        File dir = new File("pitch_data_files");
+        File dir = new File("test_cases");
         File[] files = dir.listFiles((d, name) -> name.endsWith(".csv"));
         // ...
         
@@ -82,6 +82,7 @@ public class PitchDataReader {
 
                 // Future test cases batter over plate calculation
                 if((!(Math.abs(knee1X - pointX) <= 3))){
+                    
                     int adjustment_val = Math.abs(knee1X - pointX);
                     if(knee1X > pointX){
                         knee1X = knee1X - adjustment_val;
