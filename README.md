@@ -1,3 +1,10 @@
+# P1 - SLOW-ARC Requirements and Use-Cases
+Step 1: Elicitation and then make a requirements document and develop use cases
+
+# P2 -  Requirements Review and System Model (Team Project)
+
+# P3 - Detailed Design
+
 # P4-- Sprint-Implementation-and-Testing-
 
 HOW TO RUN && END 2 END TEST CASE SCENARIO
